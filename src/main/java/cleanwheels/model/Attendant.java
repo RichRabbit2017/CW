@@ -38,6 +38,25 @@ public class Attendant {
     @Size(max = 30)
     private String permanentAdd;
 
+    @Column(name = "state")
+    @Size(max = 30)
+    private String state;
+
+    @Column(name = "city")
+    @Size(max = 30)
+    private String city;
+
+    @Column(name = "sector")
+    @Size(max = 30)
+    private String sector;
+
+    @Column(name = "society")
+    @Size(max = 30)
+    private String society;
+
+    @Column(name = "block")
+    @Size(max = 30)
+    private String block;
 
     @Column(name = "mobile_number")
     @Size(max = 30)

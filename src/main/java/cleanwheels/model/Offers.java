@@ -23,6 +23,16 @@ public class Offers {
     @Size(max = 30)
     private String amount;
 
+    @NotNull
+    @Column(name = "description")
+    @Size(max = 30)
+    private String description;
+
+
+    @NotNull
+    @Column(name = "UsesType")
+    @Size(max = 30)
+    private String usesType;
 
     @Column(name = "expiry")
     @Size(max = 30)
