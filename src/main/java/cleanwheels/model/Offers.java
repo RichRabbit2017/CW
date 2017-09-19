@@ -24,6 +24,16 @@ public class Offers implements Serializable {
     @Size(max = 30)
     private String amount;
 
+    @NotNull
+    @Column(name = "description")
+    @Size(max = 30)
+    private String description;
+
+
+    @NotNull
+    @Column(name = "UsesType")
+    @Size(max = 30)
+    private String usesType;
 
     @Column(name = "short_description")
     @Size(max = 30)
