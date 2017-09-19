@@ -19,10 +19,15 @@ public class Packages implements Serializable {
     @Size(max = 30)
     private String name;
 
-    @NotNull
-    @Column(name = "description")
+
+    @Column(name = "short_description")
     @Size(max = 30)
-    private String description;
+    private String shortDescription;
+
+
+    @Column(name = "long_description")
+    @Size(max = 30)
+    private String longDescription;
 
     @NotNull
     @Column(name = "price")

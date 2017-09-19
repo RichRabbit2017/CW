@@ -35,9 +35,9 @@ public class Vehicle implements Serializable {
     @Size(max = 30)
     private String vehicle_category;
 
-    @Column(name = "attendent_id")
+    @Column(name = "cleaner_id")
     @Size(max = 30)
-    private String attendent_id;
+    private String cleanerId;
 
     @Column(name = "state")
     @Size(max = 30)
@@ -120,11 +120,11 @@ public class Vehicle implements Serializable {
     }
 
     public String getAttendent_id() {
-        return attendent_id;
+        return cleanerId;
     }
 
     public void setAttendent_id(String attendent_id) {
-        this.attendent_id = attendent_id;
+        this.cleanerId = attendent_id;
     }
 
     public String getState() {
