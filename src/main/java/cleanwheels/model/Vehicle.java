@@ -25,7 +25,7 @@ public class Vehicle implements Serializable {
     @Column(name = "active")
     @Size(max = 30)
     private Boolean isActive = false;
-    
+
     @Column(name = "vehicle_no")
     @Size(max = 30)
     private String vehicle_number;
