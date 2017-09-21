@@ -17,7 +17,7 @@ public class User implements Serializable {
     @Column(name = "user_id", unique = true)
     private String id;
 
-    @NotNull
+
     @Column(name = "user_name")
     @Size(max = 30)
     private String userName;
@@ -26,6 +26,7 @@ public class User implements Serializable {
     @Column(name = "user_type")
     @Size(max = 10)
     private String userType;
+
 
     @Column(name = "first_name")
     @Size(max = 20)
@@ -36,25 +37,45 @@ public class User implements Serializable {
     @Size(max = 20)
     private String lastName;
 
-
+    @NotNull
     @Column(name = "mobile_no")
     @Size(max = 10)
     private String mobileNo;
 
-
+    @NotNull
     @Column(name = "email_id")
     @Size(max = 50)
     private String emailId;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "user_img", nullable = true, columnDefinition = "longblob")
-    private byte[] user_img;
+//    @Lob
+//    @Basic(fetch = FetchType.LAZY)
+//    @Column(name = "user_img", nullable = true, columnDefinition = "longblob")
+//    private byte[] user_img;
 
     @NotNull
     @Column(name = "password")
     @Size(max = 15)
     private String password;
+
+//    @org.hibernate.annotations.Type(type="true_false")
+//    @NotNull
+//    @Column(name = "active")
+//    private boolean isActive = true;
+
+
+    @Column(name = "referred_code")
+    @Size(max = 30)
+    private String referredCode;
+
+
+    @Column(name = "referral_code")
+    @Size(max = 30)
+    private String referralCode;
+
+
+    @Column(name = "expiry")
+    @Size(max = 30)
+    private String expiry;
 
 //	@Column(name = "is_active", nullable = false, columnDefinition = "tinyint default 1")
 //	private byte isActive = 1;
@@ -70,17 +91,18 @@ public class User implements Serializable {
 //		this.password = password;
 //	}
 
-    public User(byte[] user_img) {
-        this.user_img = user_img;
+//    public User(byte[] user_img) {
+//        this.user_img = user_img;
+//
+//    }
 
-    }
-
-    public User(String userName, String mobileNo, String emailId, String password, String userType) {
-        this.userName = userName;
+    public User( String mobileNo, String emailId, String password, String userType) {
+     //   this.userName = userName;
         this.mobileNo = mobileNo;
         this.emailId = emailId;
         this.password = password;
         this.userType = userType;
+     //   this.isActive = isActive;
     }
 
     public String getId() {
@@ -147,7 +169,43 @@ public class User implements Serializable {
         this.emailId = emailId;
     }
 
-    public void setUser_img(byte[] user_img) {
-        this.user_img = user_img;
+//  public void setUser_img(byte[] user_img) {
+//        this.user_img = user_img;
+//    }
+
+//    public byte[] getUser_img() {
+//        return user_img;
+//    }
+
+//    public boolean isActive() {
+//        return isActive;
+//    }
+//
+//    public void setActive(boolean active) {
+//        isActive = active;
+//    }
+
+    public String getReferredCode() {
+        return referredCode;
+    }
+
+    public void setReferredCode(String referredCode) {
+        this.referredCode = referredCode;
+    }
+
+    public String getReferralCode() {
+        return referralCode;
+    }
+
+    public void setReferralCode(String referralCode) {
+        this.referralCode = referralCode;
+    }
+
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public void setExpiry(String expiry) {
+        this.expiry = expiry;
     }
 }

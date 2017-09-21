@@ -46,4 +46,10 @@ public class UserServiceImpl implements IUserService {
     public List<User> getAllUser() {
         return userDAO.getAllUser();
     }
+
+    @Override
+    public User findByEmailOrMobile(String emailormobile) {
+       return userDAO.findByEmailOrMobile(emailormobile);
+
+    }
 }

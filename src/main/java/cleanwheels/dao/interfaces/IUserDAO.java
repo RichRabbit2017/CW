@@ -13,5 +13,7 @@ public interface IUserDAO {
     public Boolean updateUser(User user);
     public User findUserById(String id);
     public Boolean deleteUser(String id);
+
     public List<User> getAllUser();
+    User findByEmailOrMobile(String emailormobile);
 }
