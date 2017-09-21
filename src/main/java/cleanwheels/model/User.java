@@ -57,10 +57,10 @@ public class User implements Serializable {
     @Size(max = 15)
     private String password;
 
-//    @org.hibernate.annotations.Type(type="true_false")
-//    @NotNull
-//    @Column(name = "active")
-//    private boolean isActive = true;
+    @org.hibernate.annotations.Type(type="true_false")
+    @NotNull
+    @Column(name = "active")
+    private boolean isActive = true;
 
 
     @Column(name = "referred_code")
@@ -73,8 +73,8 @@ public class User implements Serializable {
     private String referralCode;
 
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "expiry")
-    @Size(max = 30)
     private String expiry;
 
 //	@Column(name = "is_active", nullable = false, columnDefinition = "tinyint default 1")
@@ -96,13 +96,14 @@ public class User implements Serializable {
 //
 //    }
 
-    public User( String mobileNo, String emailId, String password, String userType) {
+    public User( String mobileNo, String emailId, String password, String userType,boolean isActive) {
      //   this.userName = userName;
         this.mobileNo = mobileNo;
         this.emailId = emailId;
         this.password = password;
         this.userType = userType;
-     //   this.isActive = isActive;
+        this.isActive = isActive;
+       // this.expiry =
     }
 
     public String getId() {
@@ -177,13 +178,13 @@ public class User implements Serializable {
 //        return user_img;
 //    }
 
-//    public boolean isActive() {
-//        return isActive;
-//    }
-//
-//    public void setActive(boolean active) {
-//        isActive = active;
-//    }
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public String getReferredCode() {
         return referredCode;

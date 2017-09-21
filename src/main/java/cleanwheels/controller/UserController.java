@@ -22,13 +22,13 @@ import java.util.regex.Pattern;
  */
 @Controller
 @RequestMapping("/secure")
-@CrossOrigin( maxAge = 3600)
+@CrossOrigin( maxAge = 100)
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    @GetMapping("getuser")
+    @GetMapping("/getuser")
     public ResponseEntity<List<User>> getAllArticles() {
         List<User> list = userService.getAllUser();
         return new ResponseEntity<List<User>>(list, HttpStatus.OK);

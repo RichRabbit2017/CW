@@ -1,5 +1,6 @@
 package cleanwheels.controller;
 
+import cleanwheels.common.Constants;
 import cleanwheels.model.User;
 import cleanwheels.services.interfaces.IUserService;
 import io.jsonwebtoken.Jwts;
@@ -18,18 +19,18 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping("/user")
-@CrossOrigin( maxAge = 3600)
+@CrossOrigin( maxAge = 100)
 public class LoginController {
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/register")
+    @PostMapping("/registers")
     public ResponseEntity<Boolean> addUser(@RequestBody User user) {
         Boolean response = userService.addUser(user);
         return new ResponseEntity<Boolean>(response, HttpStatus.OK);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody User login) throws ServletException {
+    public ResponseEntity<String> login(@RequestBody User login) throws ServletException {
 
         String jwtToken = "";
 
@@ -58,8 +59,8 @@ public class LoginController {
         }
 
         jwtToken = Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
-
-        return jwtToken;
+                .signWith(SignatureAlgorithm.HS256, "secretkey").setExpiration(new Date(System.currentTimeMillis() + Constants.EXPIRATIONTIME)).compact();
+        System.out.println("token"+jwtToken);
+        return new ResponseEntity<String>(jwtToken, HttpStatus.OK);
     }
 }
