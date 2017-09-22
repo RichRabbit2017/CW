@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GenericException {
 
-    @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<ExceptionResponse> resourceNotFound(EmployeeNotFoundException ex) {
+    @ExceptionHandler(CleanWheelsException.class)
+    public ResponseEntity<ExceptionResponse> resourceNotFound(CleanWheelsException ex) {
         ExceptionResponse response = new ExceptionResponse();
-        response.setErrorCode("500");
+        response.setErrorCode(((CleanWheelsException)ex).getErrorCode());
         response.setErrorMessage(ex.getMessage());
 
         return new ResponseEntity<ExceptionResponse>(response, HttpStatus.NOT_FOUND);

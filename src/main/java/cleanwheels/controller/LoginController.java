@@ -1,6 +1,9 @@
 package cleanwheels.controller;
 
 import cleanwheels.common.Constants;
+import cleanwheels.exception.CleanWheelsException;
+import cleanwheels.responsemodel.JwtTokenModel;
+import cleanwheels.responsemodel.RegisterResponse;
 import cleanwheels.model.User;
 import cleanwheels.services.interfaces.IUserService;
 import io.jsonwebtoken.Jwts;
@@ -24,13 +27,13 @@ public class LoginController {
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/registers")
-    public ResponseEntity<Boolean> addUser(@RequestBody User user) {
-        Boolean response = userService.addUser(user);
-        return new ResponseEntity<Boolean>(response, HttpStatus.OK);
+    @PostMapping("/register")
+    public ResponseEntity<RegisterResponse> addUser(@RequestBody User user) throws CleanWheelsException {
+        RegisterResponse response = userService.addUser(user);
+        return new ResponseEntity<RegisterResponse>(response, HttpStatus.OK);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<String> login(@RequestBody User login) throws ServletException {
+    public ResponseEntity<JwtTokenModel> login(@RequestBody User login) throws ServletException {
 
         String jwtToken = "";
 
@@ -61,6 +64,8 @@ public class LoginController {
         jwtToken = Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, "secretkey").setExpiration(new Date(System.currentTimeMillis() + Constants.EXPIRATIONTIME)).compact();
         System.out.println("token"+jwtToken);
-        return new ResponseEntity<String>(jwtToken, HttpStatus.OK);
+        JwtTokenModel token = new JwtTokenModel();
+        token.setToken(jwtToken);
+        return new ResponseEntity<JwtTokenModel>(token, HttpStatus.OK);
     }
 }

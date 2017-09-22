@@ -1,8 +1,7 @@
 package cleanwheels.services.serviceimpl;
 
-import cleanwheels.dao.interfaces.IArticleDAO;
 import cleanwheels.dao.interfaces.IUserDAO;
-import cleanwheels.model.Article;
+import cleanwheels.responsemodel.RegisterResponse;
 import cleanwheels.model.User;
 import cleanwheels.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
-    public Boolean addUser(User user) {
+    public RegisterResponse addUser(User user) {
       return   userDAO.addUser(user);
 
     }

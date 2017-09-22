@@ -10,7 +10,7 @@ public class ExceptionResponse {
 
     private String errorCode;
     private String errorMessage;
-    private List<String> errors;
+
 
 
     public ExceptionResponse() {
@@ -32,11 +32,5 @@ public class ExceptionResponse {
         this.errorMessage = errorMessage;
     }
 
-    public List<String> getErrors() {
-        return errors;
-    }
 
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
-    }
 }

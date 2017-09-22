@@ -2,17 +2,13 @@ package cleanwheels.dao.daoimpl;
 
 import cleanwheels.common.Constants;
 import cleanwheels.dao.interfaces.IUserDAO;
-import cleanwheels.model.Article;
+import cleanwheels.responsemodel.RegisterResponse;
 import cleanwheels.model.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -40,12 +36,34 @@ public class UserDAO implements IUserDAO {
 
     }
 
+   Calendar addExpiry()
+    {
+        Calendar date = Calendar.getInstance();
+        date.add(Calendar.MONTH, 1);
+        return date;
+    }
+
     @Override
-    public Boolean addUser(User user) {
-//System.out.println(user.getFirstName().substring(0,3)+randomNumber());
-       // user.setReferralCode(user.getFirstName().substring(0,3)+randomNumber);
-          entityManager.persist(user);
-        return true;
+    public RegisterResponse addUser(User user) {
+
+        RegisterResponse registerResponse = new RegisterResponse();
+
+        if(findDuplicate(user.getMobileNo(),user.getEmailId())>0)
+        {
+            registerResponse.setErrorCode("100");
+            registerResponse.setMessage("Email or Mobile Number already in used");
+           // throw new CleanWheelsException("Email or Mobile Number already in use","100");
+
+        }
+
+      //  System.out.println("referral code : "+user.getEmailId().substring(0,3)+randomNumber());
+        user.setReferralCode(user.getEmailId().substring(0,3)+randomNumber());
+     //   System.out.println("expiry :"+addExpiry().getTime());
+        user.setExpiry(addExpiry().getTime());
+        entityManager.persist(user);
+        registerResponse.setMessage("Successfully register");
+
+        return registerResponse;
     }
 
     @Override
@@ -73,6 +91,16 @@ public class UserDAO implements IUserDAO {
     public List<User> getAllUser() {
         String hql = "FROM User";
         return (List<User>) entityManager.createQuery(hql).getResultList();
+    }
+
+    public int findDuplicate(String mobileNo,String emailId)
+    {
+        User result= null;
+            TypedQuery<User> tq = entityManager.createQuery("from User WHERE mobile_no = :mobile or email_id = :mailid", User.class);
+        tq.setParameter("mobile", mobileNo);
+        tq.setParameter("mailid", emailId);
+      List<User> resultList =  tq.getResultList();
+      return resultList.size();
     }
 
     @Override

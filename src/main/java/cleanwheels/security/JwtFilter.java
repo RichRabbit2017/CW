@@ -1,6 +1,6 @@
 package cleanwheels.security;
 
-import cleanwheels.exception.EmployeeNotFoundException;
+import cleanwheels.exception.CleanWheelsException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
@@ -32,7 +32,7 @@ public class JwtFilter extends GenericFilterBean {
 
 			if (authHeader == null || !authHeader.startsWith("Bearer ")) {
 			//	throw new ServletException("Missing or invalid Authorization header");
-				throw new EmployeeNotFoundException("invalid Authorization header");
+				throw new CleanWheelsException("invalid Authorization header","500");
 			}
 
 			final String token = authHeader.substring(7);

@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "users")
@@ -75,7 +77,7 @@ public class User implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "expiry")
-    private String expiry;
+    private Date expiry;
 
 //	@Column(name = "is_active", nullable = false, columnDefinition = "tinyint default 1")
 //	private byte isActive = 1;
@@ -96,12 +98,13 @@ public class User implements Serializable {
 //
 //    }
 
-    public User( String mobileNo, String emailId, String password, String userType,boolean isActive) {
+    public User( String mobileNo, String emailId, String password, String userType,String referredCode,boolean isActive) {
      //   this.userName = userName;
         this.mobileNo = mobileNo;
         this.emailId = emailId;
         this.password = password;
         this.userType = userType;
+        this.referredCode = referredCode;
         this.isActive = isActive;
        // this.expiry =
     }
@@ -202,11 +205,11 @@ public class User implements Serializable {
         this.referralCode = referralCode;
     }
 
-    public String getExpiry() {
+    public Date getExpiry() {
         return expiry;
     }
 
-    public void setExpiry(String expiry) {
+    public void setExpiry(Date expiry) {
         this.expiry = expiry;
     }
 }

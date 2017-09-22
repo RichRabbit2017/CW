@@ -1,5 +1,6 @@
 package cleanwheels.dao.interfaces;
 
+import cleanwheels.responsemodel.RegisterResponse;
 import cleanwheels.model.User;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface IUserDAO {
 
-    public Boolean addUser(User user);
+    public RegisterResponse addUser(User user);
     public Boolean updateUser(User user);
     public User findUserById(String id);
     public Boolean deleteUser(String id);

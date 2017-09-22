@@ -1,21 +1,15 @@
 package cleanwheels.controller;
 
-import cleanwheels.model.Article;
 import cleanwheels.model.User;
-import cleanwheels.services.interfaces.IArticleService;
+import cleanwheels.responsemodel.UserObj;
 import cleanwheels.services.interfaces.IUserService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletException;
-import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Created by sarvaraj.singh on 31-08-2017.
@@ -29,9 +23,12 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/getuser")
-    public ResponseEntity<List<User>> getAllArticles() {
+    public ResponseEntity<UserObj> getAllArticles() {
         List<User> list = userService.getAllUser();
-        return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+     UserObj b =   new UserObj();
+     b.setAllusers(list);
+
+        return new ResponseEntity<UserObj>(b, HttpStatus.OK);
     }
     @GetMapping("removeuser/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable("id")  String id) {
