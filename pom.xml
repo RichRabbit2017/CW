@@ -60,7 +60,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>cleanwheel.Application</start-class>
+        <start-class>cleanwheels.Application</start-class>
         <java.version>1.8</java.version>
     </properties>
 
@@ -69,6 +69,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <mainClass>cleanwheels.Application</mainClass>
+                </configuration>
             </plugin>
         </plugins>
         <finalName>UAtoday</finalName>

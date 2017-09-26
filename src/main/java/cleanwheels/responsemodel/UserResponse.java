@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by sarvaraj.singh on 22-09-2017.
  */
-public class UserObj {
+public class UserResponse {
    List<User> allusers;
 
     public List<User> getAllusers() {

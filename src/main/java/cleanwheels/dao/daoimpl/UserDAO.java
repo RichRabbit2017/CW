@@ -96,7 +96,7 @@ public class UserDAO implements IUserDAO {
     public int findDuplicate(String mobileNo,String emailId)
     {
         User result= null;
-            TypedQuery<User> tq = entityManager.createQuery("from User WHERE mobile_no = :mobile or email_id = :mailid", User.class);
+        TypedQuery<User> tq = entityManager.createQuery("from User WHERE mobile_no = :mobile or email_id = :mailid", User.class);
         tq.setParameter("mobile", mobileNo);
         tq.setParameter("mailid", emailId);
       List<User> resultList =  tq.getResultList();
@@ -114,8 +114,8 @@ public class UserDAO implements IUserDAO {
             TypedQuery<User> tq = entityManager.createQuery("from User WHERE mobile_no = :value", User.class);
            result = tq.setParameter("value",emailormobile).getSingleResult();
         }else {
-            TypedQuery<User> tq = entityManager.createQuery("from User WHERE column=?", User.class);
-           result = tq.setParameter("email_id", emailormobile).getSingleResult();
+            TypedQuery<User> tq = entityManager.createQuery("from User WHERE email_id = :value", User.class);
+           result = tq.setParameter("value", emailormobile).getSingleResult();
 
         }
 

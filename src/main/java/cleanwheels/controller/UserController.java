@@ -1,7 +1,7 @@
 package cleanwheels.controller;
 
 import cleanwheels.model.User;
-import cleanwheels.responsemodel.UserObj;
+import cleanwheels.responsemodel.UserResponse;
 import cleanwheels.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +23,12 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/getuser")
-    public ResponseEntity<UserObj> getAllArticles() {
+    public ResponseEntity<UserResponse> getAllArticles() {
         List<User> list = userService.getAllUser();
-     UserObj b =   new UserObj();
+     UserResponse b =   new UserResponse();
      b.setAllusers(list);
 
-        return new ResponseEntity<UserObj>(b, HttpStatus.OK);
+        return new ResponseEntity<UserResponse>(b, HttpStatus.OK);
     }
     @GetMapping("removeuser/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable("id")  String id) {

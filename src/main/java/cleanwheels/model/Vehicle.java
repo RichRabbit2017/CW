@@ -19,12 +19,11 @@ public class Vehicle implements Serializable {
 
     @NotNull
     @Column(name = "user_id")
-    @Size(max = 30)
     private String userId;
 
+    @org.hibernate.annotations.Type(type="true_false")
     @Column(name = "active")
-    @Size(max = 30)
-    private Boolean isActive = false;
+    private boolean isActive = false;
 
     @Column(name = "vehicle_no")
     @Size(max = 30)
@@ -81,6 +80,12 @@ public class Vehicle implements Serializable {
     @Column(name = "bonus_days")
     @Size(max = 30)
     private String bonus_days;
+
+
+    Vehicle()
+    {
+
+    }
 
     public int getId() {
         return id;
@@ -208,5 +213,21 @@ public class Vehicle implements Serializable {
 
     public void setBonus_days(String bonus_days) {
         this.bonus_days = bonus_days;
+    }
+
+    public boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String getCleanerId() {
+        return cleanerId;
+    }
+
+    public void setCleanerId(String cleanerId) {
+        this.cleanerId = cleanerId;
     }
 }
