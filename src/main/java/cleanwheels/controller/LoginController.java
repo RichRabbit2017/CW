@@ -38,7 +38,7 @@ public class LoginController {
         String jwtToken = "";
 
         if ((login.getEmailId() == null||login.getMobileNo()== null) && login.getPassword() == null) {
-            throw new ServletException("Please fill in username and password");
+            throw new CleanWheelsException("Please fill in username and password","400");
         }
 
         String email = login.getEmailId();
@@ -46,19 +46,20 @@ public class LoginController {
 
         User user;
 
+        if(login.getMobileNo()== null || login.getMobileNo().equalsIgnoreCase(""))
+            user = userService.findByEmailOrMobile(login.getEmailId());
+        else
             user = userService.findByEmailOrMobile(login.getMobileNo());
 
 
-
-
         if (user == null) {
-            throw new ServletException("User email not found.");
+            throw new CleanWheelsException("User email/mobile not found.","400");
         }
 
         String pwd = user.getPassword();
 
         if (!password.equals(pwd)) {
-            throw new ServletException("Invalid login. Please check your name and password.");
+            throw new CleanWheelsException("Invalid login. Please check password.","400");
         }
 
         jwtToken = Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date())
@@ -66,6 +67,11 @@ public class LoginController {
         System.out.println("token"+jwtToken);
         JwtTokenModel token = new JwtTokenModel();
         token.setToken(jwtToken);
+        token.setUser_id(user.getId());
+        if(user.getEmailId()!=null)
+        token.setEmail_id(user.getEmailId());
+        if(user.getFirstName()!=null && user.getLastName()!=null)
+        token.setUser_name(user.getFirstName()+user.getLastName());
         return new ResponseEntity<JwtTokenModel>(token, HttpStatus.OK);
     }
 }

@@ -29,7 +29,11 @@ public class VehicleDAO implements IVehicleDAO {
 
     @Override
     public Boolean updateVehicle(Vehicle vehicle) {
-        Vehicle userObj = findVehicleById(vehicle.getId());
+        Vehicle vehicleObj = findVehicleById(vehicle.getId());
+        vehicleObj.setActive(vehicle.getActive());
+        vehicleObj.setVehicle_number(vehicle.getVehicle_number());
+        vehicleObj.setCleanerId(vehicle.getCleanerId());
+        vehicleObj.setCleanerId(vehicle.getCleanerId());
       //  userObj.setMobileNo(vehicle.getMobileNo());
         // userObj.setCategory(article.getCategory());
         entityManager.flush();

@@ -20,9 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class VehicleController {
     @Autowired
     private IVehicleService vehicleService;
-    @PostMapping("/addVehicle")
+    @PostMapping("/addvehicle")
     public ResponseEntity<String> addVehicle(@RequestBody Vehicle vehicle) throws CleanWheelsException {
         boolean response = vehicleService.addVehicle(vehicle);
+        return new ResponseEntity<String>("Successfully", HttpStatus.OK);
+    }
+
+    @PostMapping("/updatevehicle")
+    public ResponseEntity<String> updateVehicle(@RequestBody Vehicle vehicle) throws CleanWheelsException {
+        boolean response = vehicleService.updateVehicle(vehicle);
         return new ResponseEntity<String>("Successfully", HttpStatus.OK);
     }
 }

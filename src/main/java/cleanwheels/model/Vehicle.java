@@ -23,7 +23,7 @@ public class Vehicle implements Serializable {
 
     @org.hibernate.annotations.Type(type="true_false")
     @Column(name = "active")
-    private boolean isActive = false;
+    private boolean isActive ;
 
     @Column(name = "vehicle_no")
     @Size(max = 30)
@@ -127,13 +127,6 @@ public class Vehicle implements Serializable {
         this.vehicle_category = vehicle_category;
     }
 
-    public String getAttendent_id() {
-        return cleanerId;
-    }
-
-    public void setAttendent_id(String attendent_id) {
-        this.cleanerId = attendent_id;
-    }
 
     public String getState() {
         return state;

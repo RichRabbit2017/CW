@@ -14,6 +14,6 @@ public class GenericException {
         response.setErrorCode(((CleanWheelsException)ex).getErrorCode());
         response.setErrorMessage(ex.getMessage());
 
-        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.BAD_REQUEST);
     }
 }

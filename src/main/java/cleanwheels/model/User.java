@@ -62,7 +62,7 @@ public class User implements Serializable {
     @org.hibernate.annotations.Type(type="true_false")
     @NotNull
     @Column(name = "active")
-    private boolean isActive = false;
+    private boolean isActive;
 
 
     @Column(name = "referred_code")
