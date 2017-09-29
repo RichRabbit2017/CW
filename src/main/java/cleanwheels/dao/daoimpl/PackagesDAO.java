@@ -33,7 +33,7 @@ public class PackagesDAO implements IPackagesDAO {
 
     @Override
     public Packages findPackageByCityAndCategory(String category, String city) {
-        TypedQuery<Packages> tq = entityManager.createQuery("from Packages WHERE city = :city and category = :category", Packages.class);
+        TypedQuery<Packages> tq = entityManager.createQuery("from Packages WHERE city = :city and vehicle_category = :category", Packages.class);
        tq.setParameter("city",city);
         tq.setParameter("category",category);
          Packages  result = tq.getSingleResult();

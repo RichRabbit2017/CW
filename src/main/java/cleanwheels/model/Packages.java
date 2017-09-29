@@ -53,4 +53,78 @@ public class Packages implements Serializable {
     @Column(name = "city")
     @Size(max = 30)
     private String city;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getVehicleCategory() {
+        return vehicleCategory;
+    }
+
+    public void setVehicleCategory(String vehicleCategory) {
+        this.vehicleCategory = vehicleCategory;
+    }
+
+    public String getVehiclePrice() {
+        return vehiclePrice;
+    }
+
+    public void setVehiclePrice(String vehiclePrice) {
+        this.vehiclePrice = vehiclePrice;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
 }
