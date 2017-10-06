@@ -2,6 +2,7 @@ package cleanwheels.dao.daoimpl;
 
 import cleanwheels.common.Constants;
 import cleanwheels.dao.interfaces.IUserDAO;
+import cleanwheels.exception.CleanWheelsException;
 import cleanwheels.responsemodel.RegisterResponse;
 import cleanwheels.model.User;
 import org.springframework.stereotype.Repository;
@@ -44,15 +45,15 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public RegisterResponse addUser(User user) {
+    public Boolean addUser(User user) {
 
         RegisterResponse registerResponse = new RegisterResponse();
 
         if(findDuplicate(user.getMobileNo(),user.getEmailId())>0)
         {
-            registerResponse.setErrorCode("100");
-            registerResponse.setMessage("Email or Mobile Number already in used");
-           // throw new CleanWheelsException("Email or Mobile Number already in use","100");
+          //  registerResponse.setErrorCode("100");
+          //  registerResponse.setMessage("Email or Mobile Number already in used");
+            throw new CleanWheelsException("Email or Mobile Number already in use","100");
 
         }
 
@@ -60,10 +61,15 @@ public class UserDAO implements IUserDAO {
         user.setReferralCode(user.getEmailId().substring(0,3)+randomNumber());
      //   System.out.println("expiry :"+addExpiry().getTime());
         user.setExpiry(addExpiry().getTime());
-        entityManager.persist(user);
-        registerResponse.setMessage("Successfully register");
+        try {
+            entityManager.persist(user);
+        }catch (Exception e)
+        {
+            throw new CleanWheelsException("Oops somting went worng...","100");
+        }
 
-        return registerResponse;
+
+        return true;
     }
 
     @Override

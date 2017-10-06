@@ -20,7 +20,7 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
-    public RegisterResponse addUser(User user) {
+    public Boolean addUser(User user) {
       return   userDAO.addUser(user);
 
     }

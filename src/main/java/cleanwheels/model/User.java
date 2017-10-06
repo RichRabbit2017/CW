@@ -41,7 +41,7 @@ public class User implements Serializable {
 
     @NotNull
     @Column(name = "mobile_no")
-    @Size(max = 10)
+    @Size(max = 40)
     private String mobileNo;
 
     @NotNull

@@ -28,9 +28,26 @@ public class LoginController {
     private IUserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> addUser(@RequestBody User user) throws CleanWheelsException {
-        RegisterResponse response = userService.addUser(user);
-        return new ResponseEntity<RegisterResponse>(response, HttpStatus.OK);
+    public ResponseEntity<JwtTokenModel> addUser(@RequestBody User user) throws CleanWheelsException {
+      Boolean  registerStatus = userService.addUser(user);
+        JwtTokenModel token = new JwtTokenModel();
+         if(registerStatus) {
+             if (user.getMobileNo() == null || user.getMobileNo().equalsIgnoreCase(""))
+                 user = userService.findByEmailOrMobile(user.getEmailId());
+             else
+                 user = userService.findByEmailOrMobile(user.getMobileNo());
+
+             String jwtToken = Jwts.builder().setSubject(user.getEmailId()).claim("roles", "user").setIssuedAt(new Date())
+                     .signWith(SignatureAlgorithm.HS256, "secretkey").setExpiration(new Date(System.currentTimeMillis() + Constants.EXPIRATIONTIME)).compact();
+
+             token.setToken(jwtToken);
+             token.setUser_id(user.getId());
+             if (user.getEmailId() != null)
+                 token.setEmail_id(user.getEmailId());
+             if (user.getFirstName() != null && user.getLastName() != null)
+                 token.setUser_name(user.getFirstName() + user.getLastName());
+         }
+        return new ResponseEntity<JwtTokenModel>(token, HttpStatus.OK);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<JwtTokenModel> login(@RequestBody User login) throws ServletException {

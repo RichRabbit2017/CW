@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IUserDAO {
 
-    public RegisterResponse addUser(User user);
+    public Boolean addUser(User user);
     public Boolean updateUser(User user);
     public User findUserById(String id);
     public Boolean deleteUser(String id);
